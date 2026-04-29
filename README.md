@@ -42,6 +42,46 @@
 - 把每轮对话都包装成 paper plan
 - 用看似完整的方案替代真正的研究思考
 
+## Workflow
+
+这个 skill 的核心逻辑是：默认陪你思考，只有你明确要求时才进入 idea discovery、收敛、实验规划或实现 handoff。
+
+```mermaid
+flowchart TD
+    A["用户提出研究方向 / 想法 / 困惑"] --> B["默认模式：Early Exploration"]
+    B --> C["Research Q&A<br/>围绕当前问题继续问答"]
+    C --> D["更新对话状态<br/>假设 / 已排除方向 / 当前关注点 / 未解问题"]
+    D --> E{"是否自然出现有价值 insight？"}
+    E -->|是| F["Insight Moment<br/>简洁说一个 insight"]
+    E -->|否| G["继续正常问答<br/>不强行制造 insight"]
+    F --> H["给一个关键追问"]
+    G --> H
+    H --> C
+
+    C --> I{"是否需要 reference？"}
+    I -->|是| J["Literature Grounding<br/>找文献 / 概念 / 相关脉络"]
+    J --> K["用 reference 拓展思考<br/>不急着形成方案"]
+    K --> H
+
+    C --> L{"用户明确要求 idea？"}
+    L -->|是| M["Explicit Idea Discovery<br/>基于对话状态 + 文献发现候选 idea"]
+    L -->|否| C
+
+    C --> N{"用户明确要求收敛？"}
+    N -->|critique / validation / 实验规划| O["Convergence Tools"]
+    N -->|实现 / 改 repo / 写代码| P["Implementation Handoff"]
+    O --> Q["评估风险 / 验证路径 / 收敛判断"]
+    P --> R["整理机制和未决细节<br/>交给 implementation skill"]
+
+    style B fill:#e8f3ff,stroke:#2563eb
+    style C fill:#f8fafc,stroke:#64748b
+    style F fill:#fff7ed,stroke:#ea580c
+    style J fill:#f0fdf4,stroke:#16a34a
+    style M fill:#fef2f2,stroke:#dc2626
+    style O fill:#f5f3ff,stroke:#7c3aed
+    style P fill:#f5f3ff,stroke:#7c3aed
+```
+
 ## Behavior Guarantee
 
 这个 skill 明确要求：
