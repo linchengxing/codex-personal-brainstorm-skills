@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Discussion Partner"
+  short_description: "Research Q&A and insight partner"
+  default_prompt: "Use $brainstorm-research-ideas as an early-stage research Q&A partner: help me think, surface insights and references, and avoid final plans, methods, experiments, or idea lists unless I explicitly ask."
